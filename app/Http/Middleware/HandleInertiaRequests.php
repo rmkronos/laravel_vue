@@ -33,6 +33,12 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
+
+    /**
+     * Variaveis globais para todos os componentes do Inertia
+     * Basta adicionar a variavel no array abaixo e ela estará disponível em todos os componentes do Inertia
+     */
+
     public function share(Request $request): array
     {
         return [
@@ -42,6 +48,8 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'autor'=> 'Robson Moura',
+            'since'=> '2026-07-01',
         ];
     }
 }

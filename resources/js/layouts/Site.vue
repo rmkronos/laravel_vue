@@ -1,5 +1,18 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
+
+
+/**
+ * Exemplo de como acessar as props globais do Inertia
+ * Basta usar o usePage() e acessar a propriedade props
+ * Local do arquivo: Http/Middleware/HandleInertiaRequests.php
+ */
+const page = usePage();
+
+console.log('Props recebidas no layout:', page.props.autor, page.props.since);
+
+
+
 </script>
 
 <template>
