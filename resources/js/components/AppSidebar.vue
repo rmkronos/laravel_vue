@@ -18,6 +18,7 @@ import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 import NavAdmin from './NavAdmin.vue';
 import NavConteudo from './NavConteudo.vue';
+import NavEdicao from './NavEdicao.vue';
 
 
 const mainNavItems: NavItem[] = [
@@ -65,6 +66,7 @@ const footerNavItems: NavItem[] = [
             <NavMain :items="mainNavItems" />
             <NavAdmin /> 
             <NavConteudo />   
+            <NavEdicao />
         </SidebarContent>
 
         <SidebarFooter>

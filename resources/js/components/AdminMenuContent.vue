@@ -39,7 +39,7 @@ import type { User } from '@/types';
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem :as-child="true">
-            <Link class="block w-full cursor-pointer" href="#">
+            <Link class="block w-full cursor-pointer" href="/users">
                 <UsersRound class="mr-2 h-4 w-4" />
                 Usuários e Jurados 
             </Link>
