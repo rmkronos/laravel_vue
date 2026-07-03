@@ -21,9 +21,13 @@ const props = defineProps<{
 
 <template>
   <div class="container mx-auto py-8">
-    <h1 class="text-2xl font-bold mb-4">Visualizar Usuário</h1>
-    <div class="flex space-x-1">Listar</div>
-    <div class="shadow-lg sm:rounded-b-lg p-4 border border-gray-200 text-gray-900 dark:text-gray-200 dark:border-gray-700 dark:border-2 dark:bg-sidebar">
+    <div class="flex items-center justify-between p-4 bg-sidebar rounded-lg shadow-sm border border-gray-100">
+      <h1 class="text-2xl font-bold mb-4">Visualizar Usuário</h1>
+      <div class="inline-flex items-center justify-center bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 mb-4">
+          <Link href="/users" class="inline-flex items-center"><List class="mr-1 h-4 w-4" /> Listar</Link>
+      </div>
+    </div>
+    <div class="shadow-lg sm:rounded-b-lg p-4 border border-gray-200 text-gray-900 dark:text-gray-200 dark:border-gray-100 dark:border dark:bg-sidebar">
       <p><span class="text-bold text-gray-500">Código:</span> <span class="dark:text-gray-100">{{ props.user.id  }}</span></p>      
       <div><span class="text-bold text-gray-500">Nome:</span> <span class="dark:text-gray-100">{{ props.user.name }}</span></div>
       <div><span class="text-bold text-gray-400">Email:</span> <span class="dark:text-gray-100">{{ props.user.email }}</span></div>
