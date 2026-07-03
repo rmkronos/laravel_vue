@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class UserController extends Controller
 {
     /**
@@ -32,7 +33,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validado = $request->validate(
+            [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            ],
+            [
+                'name.required' => 'O campo nome é obrigatório.',
+                'email.required' => 'O campo email é obrigatório.',
+                'email.email' => 'O campo email deve ser um endereço de email válido.',
+                'email.unique' => 'O email informado já está em uso.',
+                'password.required' => 'O campo senha é obrigatório.',
+                'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
+                'password.confirmed' => 'A confirmação da senha não corresponde.',
+            ]
+        );
+
+        User::create([
+            'name' => $validado['name'],
+            'email' => $validado['email'],
+            'password' => $validado['password'],
+        ]);
+        
+        return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso!');
     }
 
     /**

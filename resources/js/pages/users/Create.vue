@@ -42,6 +42,9 @@ const submitForm = () => {
                 v-model="form.name" 
                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500 dark:bg-sidebar dark:text-gray-200 dark:border-gray-700" 
                 required/>   
+                <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
+                    {{ form.errors.name }}
+                </div>
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Email:</label>
@@ -49,6 +52,9 @@ const submitForm = () => {
                 v-model="form.email"
                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500 dark:bg-sidebar dark:text-gray-200 dark:border-gray-700" 
                 required/>
+                <div v-if="form.errors.email" class="text-red-500 text-sm mt-1">
+                    {{ form.errors.email }}
+                </div>
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Senha:</label>
@@ -57,6 +63,9 @@ const submitForm = () => {
                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500 dark:bg-sidebar dark:text-gray-200 dark:border-gray-700" 
                 required/>
             </div>
+            <div v-if="form.errors.password" class="text-red-500 text-sm mt-1">
+                {{ form.errors.password }}
+            </div>
             <div class="mb-4">
                 <label for="password_confirmation" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Confirmar Senha:</label>
                 <input type="password" id="password_confirmation" name="password_confirmation"
@@ -64,11 +73,14 @@ const submitForm = () => {
                  class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500 dark:bg-sidebar dark:text-gray-200 dark:border-gray-700" 
                  required/>
             </div>
+            <div v-if="form.errors.password_confirmation" class="text-red-500 text-sm mt-1">
+                {{ form.errors.password_confirmation }}
+            </div>
 
             <div class="flex justify-center">
                 <button type="submit" class="inline-flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     <SavePlusIcon class="mr-1 h-4 w-4" />
-                    Cadastrar
+                    <span>{{form.processing?'Salvando...':'Cadastrar'}}</span>                    
                 </button>
             </div>
 
