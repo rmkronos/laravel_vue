@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->paginate(10);
+        $users = User::orderBy('id', 'desc')->paginate(4);
         return inertia('users/Index', [
             'users' => $users,
         ]);
@@ -24,7 +24,7 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {    
         return inertia('users/Create');
     }
 
@@ -114,8 +114,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         //
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'Usuário removido com sucesso!');
     }
 }
