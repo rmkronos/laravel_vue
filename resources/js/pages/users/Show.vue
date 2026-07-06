@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FlashMessage from '@/components/FlashMessage.vue';
 import { Link } from '@inertiajs/vue3';
 import { List } from '@lucide/vue';
 
@@ -21,6 +22,7 @@ const props = defineProps<{
 
 <template>
   <div class="container mx-auto py-8">
+    <FlashMessage />
     <div class="flex items-center justify-between p-4 bg-sidebar rounded-lg shadow-sm border border-gray-100">
       <h1 class="text-2xl font-bold mb-4">Visualizar Usuário</h1>
       <div class="inline-flex items-center justify-center bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 mb-4">

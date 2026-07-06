@@ -46,18 +46,18 @@ class UserController extends Controller
                 'email.email' => 'O campo email deve ser um endereço de email válido.',
                 'email.unique' => 'O email informado já está em uso.',
                 'password.required' => 'O campo senha é obrigatório.',
-                'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
+                'password.min' => 'A senha deve ter no mínimo :min caracteres.',
                 'password.confirmed' => 'A confirmação da senha não corresponde.',
             ]
         );
 
-        User::create([
+        $user = User::create([
             'name' => $validado['name'],
             'email' => $validado['email'],
             'password' => $validado['password'],
         ]);
         
-        return redirect()->route('users.index')->with('success', 'Usuário criado com sucesso!');
+        return redirect()->route('users.show',['user'=>$user->id])->with('success', 'Usuário criado com sucesso!');
     }
 
     /**
@@ -74,17 +74,41 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+   
+        return inertia('users/Edit', [
+            'user' => $user,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(User $user, Request $request)
     {
-        //
+        // Implement the logic to update the user with the given ID
+        
+        $validado = $request->validate(
+            [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            ],
+            [
+                'name.required' => 'O campo nome é obrigatório.',
+                'email.required' => 'O campo email é obrigatório.',
+                'email.email' => 'O campo email deve ser um endereço de email válido.',
+                'email.unique' => 'O email informado já está em uso.',
+            ]
+        );
+        
+        $user->update([
+            'name' => $validado['name'],
+            'email' => $validado['email'],            
+        ]);
+
+        return redirect()->route('users.show',['user'=>$user->id])->with('success', 'Usuário atualizado com sucesso!');
+
     }
 
     /**

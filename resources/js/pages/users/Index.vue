@@ -40,7 +40,7 @@ const props = defineProps<{
                     <td class="py-2 px-4 border-b">{{ user.name }}</td>
                     <td class="py-2 px-4 border-b">{{ user.email }}</td>
                     <td class="py-2 px-4 border-b text-center">
-                        <button class="inline-flex items-center bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600"><SquarePenIcon class="mr-1 h-4 w-4"/> 
+                        <button class="inline-flex items-center bg-amber-400 text-white text-sm px-4 py-2 rounded hover:bg-amber-600"><SquarePenIcon class="mr-1 h-4 w-4"/> 
                             <Link :href="`/users/edit/${user.id}`" > Editar</Link>
                         </button>
                         <button class="inline-flex items-center bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 ml-1"><Trash2 class="mr-1 h-4 w-4"/> Excluir</button>
