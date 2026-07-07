@@ -46,6 +46,17 @@ const submitForm = () => {
 
         <form action="/users/store" method="post" @submit.prevent="submitForm">
             <div class="mb-4">
+                <label for="name" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Código:</label>
+                <input type="text" id="name" name="name" 
+                v-model="form.id" 
+                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500 dark:bg-sidebar dark:text-gray-200 dark:border-gray-700" 
+                disabled
+                />   
+                <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
+                    {{ form.errors.name }}
+                </div>
+            </div>
+            <div class="mb-4">
                 <label for="name" class="block text-gray-700 dark:text-gray-200 font-bold mb-2">Nome:</label>
                 <input type="text" id="name" name="name" 
                 v-model="form.name" 
