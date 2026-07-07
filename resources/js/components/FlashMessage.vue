@@ -30,6 +30,7 @@ const msgError = (msg: string)=>{
 </script>
 
 <template>
+    <!-- Flashmessage com div de forma generica-->
     <!-- <div class="mb-4">
         <div v-if="success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
             <strong class="font-bold">Sucesso!</strong>
@@ -40,6 +41,7 @@ const msgError = (msg: string)=>{
             <span class="block sm:inline">{{ error }}</span>
         </div>
     </div> -->
+     <!-- Flashmessage com sweetalert2 de forma generica-->
        <div class="mb-4">
             <div v-if="success">
             {{ msgSuccess(`${success}`) }}
