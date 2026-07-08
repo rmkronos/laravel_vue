@@ -33,10 +33,12 @@ const confirmDelete = () => {
 </script>
 
 <template>
-    <button class="inline-flex items-center bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 mb-4"
+    
+    <button class="inline-flex items-center justify-center bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600"
         @click="confirmDelete()"
     >
         <Trash2 class="mr-1 h-4 w-4"/> <span>{{ buttonText?? 'Excluir'}}</span>
 
     </button>
+    
 </template>

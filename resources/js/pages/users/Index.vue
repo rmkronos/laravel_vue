@@ -28,7 +28,7 @@ const searchQuery = ref(props.filters.search || '');
 const isLoading = ref(false);
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
 
-const performSearch = (value) => {
+const performSearch = (value: string) => {
     // isLoading.value = true;
     router.get('/users', { search: value }, {
         preserveState: true,
@@ -49,9 +49,8 @@ const performSearch = (value) => {
     });
 };
 
-
 // Monitoramento reativo do input com implementação nativa de Debounce
-watch(searchQuery, (newValue) => {
+watch(searchQuery, (newValue: string) => {
   // Limpa o temporizador anterior se o usuário continuar digitando antes dos 300ms
   if (debounceTimeout) {
     clearTimeout(debounceTimeout);
@@ -161,20 +160,24 @@ const deleteUser = (userId: number) => {
                     <td class="py-2 px-4 border-b">{{ user.name }}</td>
                     <td class="py-2 px-4 border-b">{{ user.email }}</td>
                     <td class="border-b text-center">
-                        <button class="inline-flex items-center bg-amber-400 text-white text-sm px-4 py-2 rounded hover:bg-amber-600"><SquarePenIcon class="mr-1 h-4 w-4"/> 
-                            <Link :href="`/users/edit/${user.id}`" > Editar</Link>
-                        </button>
+                    <div class="inline-flex items-center justify-center gap-2">
+                         
+                        <Link :href="`/users/edit/${user.id}`" class="inline-flex items-center  bg-amber-400 text-white text-sm px-4 py-2 rounded hover:bg-amber-600">
+                            <SquarePenIcon class="mr-1 h-4 w-4" /> Editar
+                        </Link>                        
 
-                        <!-- <button class="inline-flex items-center bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 ml-1"
-                        @click="deleteUser(user.id)"
-                        >
-                            <Trash2 class="mr-1 h-4 w-4"/> Excluir
-                        </button> -->
-                        <ButtonDelete :url="`/users/delete/${user.id}`" title="Tem certeza que deseja excluir este usuário?" class="ml-1" /> 
+                        <ButtonDelete :url="`/users/delete/${user.id}`" title="Tem certeza que deseja excluir este usuário?" /> 
 
-                        <button class="inline-flex items-center bg-emerald-600 text-white text-sm px-4 py-2 rounded hover:bg-emerald-800 ml-1"><EyeIcon class="mr-1 h-4 w-4"/> 
-                            <Link :href="`/users/show/${user.id}`" > Visualizar</Link>                        
-                        </button>
+                        <Link :href="`/users/show/${user.id}`" class="inline-flex items-center bg-emerald-600 text-white text-sm px-4 py-2 rounded hover:bg-emerald-800 ml-1">
+                            <EyeIcon class="mr-1 h-4 w-4" /> Visualizar
+                        </Link>                        
+                        
+                    </div>
+                    </td>
+                </tr>
+                <tr v-if="props.users.data.length === 0">
+                    <td colspan="3" class="px-6 py-10 text-center text-sm text-gray-500">
+                    Nenhum usuário encontrado para a busca realizada.
                     </td>
                 </tr>
             </tbody>
