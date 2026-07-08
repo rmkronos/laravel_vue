@@ -26,6 +26,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('users/show/{user}',[UserController::class,'show'])->name('users.show');   
     Route::delete('users/delete/{user}',[UserController::class,'destroy'])->name('users.destroy');   
 
+    Route::get('users/exportpdf',[UserController::class,'exportpdf'])->name('users.exportpdf');   
+    Route::get('users/exportcsv',[UserController::class,'exportcsv'])->name('users.exportcsv');   
+
     
 });
 

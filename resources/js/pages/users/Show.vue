@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ButtonDelete from '@/components/ButtonDelete.vue';
 import FlashMessage from '@/components/FlashMessage.vue';
 import { Link } from '@inertiajs/vue3';
 import {  CirclePlusIcon, List, SquarePenIcon, Trash2Icon } from '@lucide/vue';
@@ -28,7 +29,8 @@ const props = defineProps<{
       <div class="flex gap-2 justify-center">
           <Link href="/users/create" class="inline-flex items-center bg-emerald-500 text-white text-sm px-4 py-2 rounded hover:bg-emerald-600 mb-4"><CirclePlusIcon class="mr-1 h-4 w-4" /> Adicionar</Link>
           <Link :href="`/users/edit/${user.id}`" class="inline-flex items-center bg-amber-500 text-white text-sm px-4 py-2 rounded hover:bg-amber-600 mb-4"><SquarePenIcon class="mr-1 h-4 w-4" /> Editar</Link>
-          <Link href="/users" class="inline-flex items-center bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 mb-4"><Trash2Icon class="mr-1 h-4 w-4" /> Excluir</Link>
+          <!-- <Link :href="`/users/delete/${user.id}`" class="inline-flex items-center bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 mb-4"><Trash2Icon class="mr-1 h-4 w-4" /> Excluir</Link> -->
+           <ButtonDelete :url="`/users/delete/${user.id}`" title="Tem certeza que deseja excluir este usuário?" /> 
           <Link href="/users" class="inline-flex items-center bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 mb-4"><List class="mr-1 h-4 w-4" /> Listar</Link>
       </div>
     </div>
