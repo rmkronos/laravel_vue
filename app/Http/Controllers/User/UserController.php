@@ -26,7 +26,8 @@ class UserController extends Controller
                 $scapeSearch = str_replace(['%','_'],['\%','\_'], $search); // Escape special characters
                 
                 return $query->where('name', 'like', "%{$scapeSearch}%")
-                    ->orWhere('email', 'like', "%{$scapeSearch}%");
+                    ->orWhere('email', 'like', "%{$scapeSearch}%")
+                    ->orWhere('id', 'like', "%{$scapeSearch}%");
             })
             ->orderBy('id', 'desc')
             ->paginate(10)
