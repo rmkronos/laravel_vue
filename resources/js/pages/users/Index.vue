@@ -27,6 +27,8 @@ const props = defineProps<{
 const searchQuery = ref(props.filters.search || '');
 const isLoading = ref(false);
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+let loadingDelayTimeout = '';    
+const loading_time_ms = 300;
 
 const performSearch = (value: string) => {
     // isLoading.value = true;
@@ -34,9 +36,13 @@ const performSearch = (value: string) => {
         preserveState: true,
         replace: true,
         only: ['users'],
+
         onStart: () => {
-            isLoading.value = true;
-        },        
+        // Dispara um timer: Se a requisição demorar mais que o threshold, mostra o loading
+            loadingDelayTimeout = setTimeout(() => {
+                isLoading.value = true;
+            }, loading_time_ms);
+        },       
         onSuccess: () => {
             isLoading.value = false;
         },
@@ -44,6 +50,10 @@ const performSearch = (value: string) => {
             isLoading.value = false;
         },
         onFinish: () => {
+            if(loadingDelayTimeout) {
+                clearTimeout(loadingDelayTimeout);
+            }
+
             isLoading.value = false;
         }
     });
@@ -135,15 +145,17 @@ const deleteUser = (userId: number) => {
       </div>
 
      <div 
-      v-if="isLoading" 
-      class="flex items-center justify-center p-8 bg-gray-50 border border-dashed border-gray-200 rounded-lg mb-6 transition-opacity duration-200"
-    >
-      <svg class="animate-spin h-5 w-5 text-blue-600 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      <span class="text-sm font-medium text-gray-600">Aguarde enquanto estou trabalhando...</span>
-    </div>
+        v-if="isLoading" 
+        class="absolute inset-0 bg-white/70 backdrop-blur-[1px] z-50 flex flex-col items-center justify-center transition-all duration-200"
+      >
+        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col items-center">
+          <svg class="animate-spin h-8 w-8 text-blue-600 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span class="text-sm font-semibold text-gray-700 animate-pulse">Aguarde enquanto estou trabalhando...</span>
+        </div>
+      </div>
         
         <table class="min-w-full bg-white border border-gray-700 shadow-lg rounded-l-lg rounded-r-lg overflow-hidden">
             <thead>

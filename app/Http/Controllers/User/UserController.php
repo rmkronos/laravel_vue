@@ -21,17 +21,26 @@ class UserController extends Controller
     {
         $search = (string) $request->input('search', '');
 
-        $users = User::query()
-            ->when($search !=='', function ($query) use ($search) {
-                $scapeSearch = str_replace(['%','_'],['\%','\_'], $search); // Escape special characters
+        //Usando do modo tradicional
+        // $users = User::query()
+        //     ->when($search !=='', function ($query) use ($search) {
+        //         $scapeSearch = str_replace(['%','_'],['\%','\_'], $search); // Escape special characters
                 
-                return $query->where('name', 'like', "%{$scapeSearch}%")
-                    ->orWhere('email', 'like', "%{$scapeSearch}%")
-                    ->orWhere('id', 'like', "%{$scapeSearch}%");
-            })
+        //         return $query->where('name', 'like', "%{$scapeSearch}%")
+        //             ->orWhere('email', 'like', "%{$scapeSearch}%")
+        //             ->orWhere('id', 'like', "%{$scapeSearch}%");
+        //     })
+        //     ->orderBy('id', 'desc')
+        //     ->paginate(10)
+        //     ->withQueryString();
+
+        //Outro jeito usando a função
+        $users = $this->applyFilters(User::query(), $search)
+            ->select(['id', 'name', 'email'])
             ->orderBy('id', 'desc')
             ->paginate(10)
             ->withQueryString();
+            
 
         return Inertia::render('users/Index', [
             'users' => $users,

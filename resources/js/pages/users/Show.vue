@@ -27,11 +27,11 @@ const props = defineProps<{
     <div class="flex items-center justify-between p-4 bg-sidebar rounded-lg shadow-sm border border-gray-100">
       <h1 class="text-2xl font-bold mb-4">Visualizar Usuário</h1>
       <div class="flex gap-2 justify-center">
-          <Link href="/users/create" class="inline-flex items-center bg-emerald-500 text-white text-sm px-4 py-2 rounded hover:bg-emerald-600 mb-4"><CirclePlusIcon class="mr-1 h-4 w-4" /> Adicionar</Link>
-          <Link :href="`/users/edit/${user.id}`" class="inline-flex items-center bg-amber-500 text-white text-sm px-4 py-2 rounded hover:bg-amber-600 mb-4"><SquarePenIcon class="mr-1 h-4 w-4" /> Editar</Link>
+          <Link href="/users/create" class="inline-flex items-center bg-emerald-500 text-white text-sm px-4 py-2 rounded hover:bg-emerald-600"><CirclePlusIcon class="mr-1 h-4 w-4" /> Adicionar</Link>
+          <Link :href="`/users/edit/${user.id}`" class="inline-flex items-center bg-amber-500 text-white text-sm px-4 py-2 rounded hover:bg-amber-600"><SquarePenIcon class="mr-1 h-4 w-4" /> Editar</Link>
           <!-- <Link :href="`/users/delete/${user.id}`" class="inline-flex items-center bg-red-500 text-white text-sm px-4 py-2 rounded hover:bg-red-600 mb-4"><Trash2Icon class="mr-1 h-4 w-4" /> Excluir</Link> -->
            <ButtonDelete :url="`/users/delete/${user.id}`" title="Tem certeza que deseja excluir este usuário?" /> 
-          <Link href="/users" class="inline-flex items-center bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 mb-4"><List class="mr-1 h-4 w-4" /> Listar</Link>
+          <Link href="/users" class="inline-flex items-center bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600"><List class="mr-1 h-4 w-4" /> Listar</Link>
       </div>
     </div>
     <div class="shadow-lg sm:rounded-b-lg p-4 border border-gray-200 text-gray-900 dark:text-gray-200 dark:border-gray-100 dark:border dark:bg-sidebar">
